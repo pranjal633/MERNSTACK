@@ -8,8 +8,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "\"# MERNSTACK\" \r \"# MERNSTACK\" \r # MERNSTACK \"# MERNSTACK\" \r #\u0000 \u0000M\u0000E\u0000R\u0000N\u0000S\u0000T\u0000A\u0000C\u0000K\u0000\r\u0000 \u0000",
   "dependencies": {
-    "express": "^4.21.2"
-  }
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "multer": "^1.4.5-lts.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranjal633/MERNSTACK.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pranjal633/MERNSTACK/issues"
+  },
+  "homepage": "https://github.com/pranjal633/MERNSTACK#readme"
 }
