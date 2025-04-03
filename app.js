@@ -2,12 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const connectDatabase = require("./database");
 const Blog = require("./model/blogmodel");
-const { storage , multer } = require("./middleware/multerConfig");
+const {storage, multer} = require("./middleware/multerConfig");
 const upload = multer({storage : storage });
 const app = express()
 app.use(express.json());
 
-storage:
 
 connectDatabase()
 
@@ -15,18 +14,14 @@ app.get("/", (req, res) => { // call back function
     res.send("Welcome to our Home Page....");
 });
 
-app.get("/blog", (req, res) => {
-    res.status(200).json({
-        msg : "This is blog page...."
-    });
-});
+
 
 app.post("/blog", upload.single("image"),async (req, res) => {
     console.log(req.body)
     
     const {faculty, course, mentor} = req.body
 
-    const filename = req.file.filename; //multipart /form-data
+    const filename = req.file.filename
 
 
     if(!faculty || !course || !mentor){
@@ -38,13 +33,36 @@ app.post("/blog", upload.single("image"),async (req, res) => {
         faculty : faculty,
         course : course,
         mentor : mentor,
-        image : image,
+        image : filename,
     })
    res.status(200).json({
     msg: "POST API hit successfully",
    });
 });
 
+//get operation
+app.get("/blog", async (req, res) => {
+    const blogs = await Blog.find();
+    res.status(200).json({
+        msg : "I am creating a mernstack project",
+        data: blogs,
+    });
+});
+
+//single get API
+app.get("/blog/:id", async (req,res) => {
+    // console.log(req.params.id)
+    // console.log("Single Blog API hitted successfully")
+    const {id} = req.params;
+    const blog = await Blog.findById(id);
+
+    res.status(200).json({
+        msg : "Single Blog fetch successfully",
+        data : blog,
+     })
+ });
+
+app.use(express.static("./storage"));
 
 app.listen(process.env.PORT, () => {
     console.log("Your node js project has been started....")

@@ -1,15 +1,15 @@
-const multer = require("multer")
+ const multer = require("multer")
 
-multer.diskStorage({
-    destination : function(req, file, cb){ //post gareko file lai destination define gareko
-        cb(null, './storage') //callbak(error, success)
+ const storage = multer.diskStorage({
+    destination : function(req, file, cb){
+        cb(null, "./storage") //cb(error, success)
     },
-    filename : function(req, file,cb){
-        cb(null, "pranjal-" + file.originalname); // file ko naming gareko
-    },
-})
+    filename : function(req, file, cb){
+        cb(null, Date.now() + "--" + file.originalname)
+    }
+ })
 
-module.exports = {
+ module.exports = {
     storage,
-    multer,
-}
+    multer, 
+ }
