@@ -1,3 +1,4 @@
+const fs = require("fs");
 require("dotenv").config();
 const express = require("express");
 const connectDatabase = require("./database");
@@ -56,11 +57,33 @@ app.get("/blog/:id", async (req,res) => {
     const {id} = req.params;
     const blog = await Blog.findById(id);
 
+    if (!blog) {
+        return res.status(400).json({
+            msg : "Please enter correct id....."
+        })
+    }
     res.status(200).json({
         msg : "Single Blog fetch successfully",
         data : blog,
      })
  });
+
+ app.delete("/blog/:id",async(req,res) => {
+    const {id} = req.params
+    const blog = await Blog.findById(id)
+    const imageName = blog.image;
+    fs.unlink('storage/${imageName}', (err) => {
+        if (err) {
+            console.log(err)
+        }else{
+            console.log("File deleted successfully")
+        }
+    })
+    await Blog.findByIdAndDelete(id)
+    res.status(200).json({
+        msg: "Blog Deleted Successfully",
+    })
+ })
 
 app.use(express.static("./storage"));
 
