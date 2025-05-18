@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "\"# MERNSTACK\" \r \"# MERNSTACK\" \r # MERNSTACK \"# MERNSTACK\" \r #\u0000 \u0000M\u0000E\u0000R\u0000N\u0000S\u0000T\u0000A\u0000C\u0000K\u0000\r\u0000 \u0000",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.12.1",
